@@ -1,0 +1,175 @@
+{
+  "project_info": {
+    "project_number": "527562819861",
+    "firebase_url": "https://testmina-24a56.firebaseio.com",
+    "project_id": "testmina-24a56",
+    "storage_bucket": "testmina-24a56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527562819861:android:478a3a44c8a56a6d",
+        "android_client_info": {
+          "package_name": "com.advisor.minasamir.pushfcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527562819861-n8h7jlls8ki9fugkhjbm1kvus2u4i2s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu5N1M6rWL5qSvO3aE4NWON3dk4cUK8q4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527562819861:android:1315cba9afaa4d8c",
+        "android_client_info": {
+          "package_name": "com.example.andoird.crashlyticsfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527562819861-qamq1uhppg841480evd08t37ira91qv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.andoird.crashlyticsfirebase",
+            "certificate_hash": "33f4e5c494ab1e6a000f8345f54786d6921ad856"
+          }
+        },
+        {
+          "client_id": "527562819861-n8h7jlls8ki9fugkhjbm1kvus2u4i2s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu5N1M6rWL5qSvO3aE4NWON3dk4cUK8q4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527562819861-n8h7jlls8ki9fugkhjbm1kvus2u4i2s3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527562819861-qf4kd7ibrf0agp92ehgm1o00la1mgmh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cmm"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527562819861:android:9df69177adcee410",
+        "android_client_info": {
+          "package_name": "com.smm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527562819861-s4omnrggjq1fa81706o76pcmnjbuvs4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smm",
+            "certificate_hash": "ed32f94dae7a868f4e12465328043ecac4144cbb"
+          }
+        },
+        {
+          "client_id": "527562819861-n8h7jlls8ki9fugkhjbm1kvus2u4i2s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu5N1M6rWL5qSvO3aE4NWON3dk4cUK8q4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527562819861-n8h7jlls8ki9fugkhjbm1kvus2u4i2s3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527562819861-qf4kd7ibrf0agp92ehgm1o00la1mgmh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cmm"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527562819861:android:73284e65f47a9d8b",
+        "android_client_info": {
+          "package_name": "hajjhackathon.wool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527562819861-n8h7jlls8ki9fugkhjbm1kvus2u4i2s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu5N1M6rWL5qSvO3aE4NWON3dk4cUK8q4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
