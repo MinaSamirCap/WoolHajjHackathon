@@ -104,7 +104,7 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
         getLatLng();
         mMap = googleMap;
         marker = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
-        currentLocation = new LatLng(lat, lng);
+        currentLocation = new LatLng(21.3546629,39.9836817);
         mMap.addMarker(marker.position(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17));
 
