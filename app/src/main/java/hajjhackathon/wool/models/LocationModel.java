@@ -37,4 +37,16 @@ public class LocationModel {
     public void setType(int type) {
         this.type = type;
     }
+
+    public static LocationModel getFreeType(double lat, double lng) {
+        LocationModel model = new LocationModel(lat, lng);
+        model.type = TYPE_FREE;
+        return model;
+    }
+
+    public static LocationModel getBusyType(double lat, double lng) {
+        LocationModel model = new LocationModel(lat, lng);
+        model.type = TYPE_BUSY;
+        return model;
+    }
 }

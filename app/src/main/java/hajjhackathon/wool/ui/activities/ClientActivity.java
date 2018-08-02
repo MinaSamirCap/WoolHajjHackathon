@@ -21,6 +21,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hajjhackathon.wool.R;
 import hajjhackathon.wool.models.LocationModel;
 import hajjhackathon.wool.utils.GPSTracker;
@@ -28,6 +31,8 @@ import hajjhackathon.wool.utils.UiUtils;
 
 public class ClientActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private double lat = 0;
     private double lng = 0;
@@ -39,36 +44,16 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                writeToFirebase();
-                UiUtils.loadSnackBar(getString(R.string.data_sent), ClientActivity.this);
-            }
-        });
-
-
-        getLocationPermission();
+        prepareMap();
     }
 
-
-    public void getLocationPermission() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    GPSTracker.PERMISSIONS_REQUEST_ACCESS_LOCATION);
-            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
-        } else {
-            // Android version is lesser than 6.0 or the permission is already granted.
-            prepareMap();
-
-        }
+    @OnClick(R.id.fab)
+    public void fabClicked(View view){
+        UiUtils.loadSnackBar(getString(R.string.data_sent), ClientActivity.this);
     }
 
     private void prepareMap() {
@@ -104,7 +89,7 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
         getLatLng();
         mMap = googleMap;
         marker = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
-        currentLocation = new LatLng(21.3546629,39.9836817);
+        currentLocation = new LatLng(21.3546629, 39.9836817);
         mMap.addMarker(marker.position(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17));
 
@@ -132,12 +117,39 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
         }
     }
 
-    private void writeToFirebase() {
+    private void writeToFirebase(int type) {
+        String reference;
+        LocationModel locationModel;
+        switch (type) {
+            case LocationModel.TYPE_BUSY:
+                reference = "arfatZone/busyLocation";
+                locationModel = LocationModel.getBusyType(lat, lng);
+                break;
+            default:
+                reference = "arfatZone/freeLocation";
+                locationModel = LocationModel.getFreeType(lat, lng);
+                break;
 
-        LocationModel locationModel = new LocationModel(lat, lng);
+        }
+
         FirebaseDatabase.getInstance()
-                .getReference("wool/locationList")
+                .getReference(reference)
                 .push()
                 .setValue(locationModel);
+    }
+
+    public void getLocationPermission() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    GPSTracker.PERMISSIONS_REQUEST_ACCESS_LOCATION);
+            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+        } else {
+            // Android version is lesser than 6.0 or the permission is already granted.
+            prepareMap();
+
+        }
     }
 }
