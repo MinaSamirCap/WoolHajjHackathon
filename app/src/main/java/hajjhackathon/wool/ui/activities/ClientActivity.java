@@ -103,7 +103,7 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
         getLatLng();
         mMap = googleMap;
-        marker = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.common_full_open_on_phone));
+        marker = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
         currentLocation = new LatLng(lat, lng);
         mMap.addMarker(marker.position(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17));
@@ -133,9 +133,11 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private void writeToFirebase() {
+
+        LocationModel locationModel = new LocationModel(lat, lng);
         FirebaseDatabase.getInstance()
                 .getReference("wool/locationList")
                 .push()
-                .setValue(new LocationModel(lat, lng));
+                .setValue(locationModel);
     }
 }
