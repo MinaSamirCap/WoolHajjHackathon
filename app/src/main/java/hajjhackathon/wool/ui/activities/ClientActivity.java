@@ -47,8 +47,10 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
     private double lat = 0;
     private double lng = 0;
     private LatLng currentLocation;
+    private LatLng pickedLocation;
     private GoogleMap mMap;
     private MarkerOptions marker;
+    private MarkerOptions locationMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        prepareMap();
+        getLocationPermission();
     }
 
     @OnClick(R.id.fab)
@@ -113,8 +115,10 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
         getLatLng();
         mMap = googleMap;
         marker = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_point));
+        locationMarker = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
+
         currentLocation = new LatLng(21.3546629, 39.9836817);
-        mMap.addMarker(marker.position(currentLocation));
+        mMap.addMarker(locationMarker.position(currentLocation));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -122,7 +126,7 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onMapClick(LatLng point) {
                 mMap.clear();
-                mMap.addMarker(marker.position(point));
+                mMap.addMarker(locationMarker.position(point));
                 lat = point.latitude;
                 lng = point.longitude;
                 addDataToMap();

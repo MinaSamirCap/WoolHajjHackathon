@@ -1,7 +1,7 @@
 <resources>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB5PYB80FuMFveQMNAB_XsTVH-nvSGKhJ0</string>
     <string name="app_name">Arafat Zone</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Nearest places</string>
     <string name="done">Done</string>
     <string name="please_open_gps">Please open GPS</string>
     <string name="data_sent">Data sent</string>
