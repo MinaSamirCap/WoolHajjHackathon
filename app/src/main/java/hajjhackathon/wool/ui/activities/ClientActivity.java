@@ -31,6 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hajjhackathon.wool.R;
 import hajjhackathon.wool.models.LocationModel;
+import hajjhackathon.wool.ui.fragments.BottomSheetFragment;
 import hajjhackathon.wool.ui.widget.PopUpPlace;
 import hajjhackathon.wool.utils.GPSTracker;
 import hajjhackathon.wool.utils.UiUtils;
@@ -99,6 +100,8 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+            bottomSheetFragment.show(getSupportFragmentManager(), "bottomSheet");
             return true;
         }
 

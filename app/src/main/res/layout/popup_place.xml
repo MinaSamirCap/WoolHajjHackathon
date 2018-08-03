@@ -21,7 +21,7 @@
         android:id="@+id/busy_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="@string/free"
         android:textColor="@color/white"
         app:backgroundTint="@color/green"
