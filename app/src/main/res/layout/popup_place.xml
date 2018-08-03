@@ -11,17 +11,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose"
-        android:textColor="@color/accent"
+        android:textColor="@color/black
+"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/busy_button"
+        android:id="@+id/free_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/free"
         android:textColor="@color/white"
         app:backgroundTint="@color/green"
@@ -30,15 +31,15 @@
         app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/free_button"
+        android:id="@+id/busy_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="@string/busy"
         android:textColor="@color/white"
         app:backgroundTint="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/busy_button" />
+        app:layout_constraintTop_toBottomOf="@+id/free_button" />
 
 </android.support.constraint.ConstraintLayout>

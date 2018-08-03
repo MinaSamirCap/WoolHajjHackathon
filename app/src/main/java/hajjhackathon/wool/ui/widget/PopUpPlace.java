@@ -54,7 +54,7 @@ public class PopUpPlace {
 
 
     @OnClick(R.id.busy_button)
-    void highRatedChecked(View view) {
+    void busyClicked(View view) {
         callbackResult.busyClicked();
         closeDialog();
     }
