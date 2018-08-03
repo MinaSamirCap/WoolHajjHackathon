@@ -56,7 +56,6 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         unbinder = ButterKnife.bind(this, view);
 
         getNearestLocation();
-
         return view;
 
     }
