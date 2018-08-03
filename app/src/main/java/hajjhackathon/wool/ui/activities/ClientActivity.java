@@ -19,21 +19,32 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hajjhackathon.wool.R;
 import hajjhackathon.wool.models.LocationModel;
+import hajjhackathon.wool.ui.widget.PopUpPlace;
 import hajjhackathon.wool.utils.GPSTracker;
 import hajjhackathon.wool.utils.UiUtils;
 
 public class ClientActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static final String FREE_LOCATION_REFERENCE = "arfatZone/freeLocation";
+    private static final String BUSY_LOCATION_REFERENCE = "arfatZone/busyLocation";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    List<LocationModel> data = new ArrayList<>();
     private double lat = 0;
     private double lng = 0;
     private LatLng currentLocation;
@@ -52,8 +63,20 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     @OnClick(R.id.fab)
-    public void fabClicked(View view){
-        UiUtils.loadSnackBar(getString(R.string.data_sent), ClientActivity.this);
+    public void fabClicked(View view) {
+        PopUpPlace popUpPlace = new PopUpPlace(this, new PopUpPlace.CallbackResult() {
+            @Override
+            public void busyClicked() {
+                writeToFirebase(LocationModel.TYPE_BUSY);
+            }
+
+            @Override
+            public void freeClicked() {
+                writeToFirebase(LocationModel.TYPE_FREE);
+            }
+        });
+        popUpPlace.showDialog();
+
     }
 
     private void prepareMap() {
@@ -103,6 +126,8 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
                 lng = point.longitude;
             }
         });
+
+        getDataForMap();
     }
 
 
@@ -122,11 +147,11 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
         LocationModel locationModel;
         switch (type) {
             case LocationModel.TYPE_BUSY:
-                reference = "arfatZone/busyLocation";
+                reference = BUSY_LOCATION_REFERENCE;
                 locationModel = LocationModel.getBusyType(lat, lng);
                 break;
             default:
-                reference = "arfatZone/freeLocation";
+                reference = FREE_LOCATION_REFERENCE;
                 locationModel = LocationModel.getFreeType(lat, lng);
                 break;
 
@@ -136,6 +161,44 @@ public class ClientActivity extends AppCompatActivity implements OnMapReadyCallb
                 .getReference(reference)
                 .push()
                 .setValue(locationModel);
+
+        UiUtils.loadSnackBar(getString(R.string.data_sent), ClientActivity.this);
+    }
+
+    private void getDataForMap() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        DatabaseReference main = databaseReference.child(BUSY_LOCATION_REFERENCE);
+
+        main.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                data.clear();
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child : children) {
+                    if (child != null) {
+                        LocationModel model = child.getValue(LocationModel.class);
+                        data.add(model);
+
+                    }
+                }
+                addDataToMap();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void addDataToMap() {
+        for (LocationModel model : data) {
+            mMap.addMarker(marker.position(new LatLng(model.lat, model.lng)));
+        }
     }
 
     public void getLocationPermission() {

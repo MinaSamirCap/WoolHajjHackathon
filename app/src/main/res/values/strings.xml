@@ -5,4 +5,7 @@
     <string name="done">Done</string>
     <string name="please_open_gps">Please open GPS</string>
     <string name="data_sent">Data sent</string>
+    <string name="choose">Choose</string>
+    <string name="busy">Busy</string>
+    <string name="free">Free</string>
 </resources>

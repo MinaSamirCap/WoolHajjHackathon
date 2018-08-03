@@ -9,6 +9,9 @@ public class LocationModel {
     public double lng;
     public int type;
 
+    public LocationModel() {
+    }
+
     public LocationModel(double lat, double lng) {
         this.lat = lat;
         this.lng = lng;
