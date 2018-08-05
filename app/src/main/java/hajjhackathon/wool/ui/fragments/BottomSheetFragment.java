@@ -85,8 +85,10 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
                         openBrowserWithMap(getActivity(), data.get(position).lat, data.get(position).lng);
                     }
                 });
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                recyclerView.setAdapter(adapter);
+                if (recyclerView != null) {
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerView.setAdapter(adapter);
+                }
             }
 
             @Override
